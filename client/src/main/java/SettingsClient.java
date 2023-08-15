@@ -8,14 +8,16 @@ import java.io.*;
  */
 public class SettingsClient {
 
-    static String userName = System.getProperty("user.name");
+    static String systemUserHome = System.getProperty("user.home");
+    //  static String userName = System.getProperty("user.name");
     static String systemFS = System.getProperty("file.separator");
     static int userPort;
     static final int DEFAULT_PORT = 11111;
     static String userHost;
     static final String DEFAULT_HOST = "127.0.0.1"; // т.е. localhost
-    static final String MAIN_DIR = "C:" + systemFS + "Users" + systemFS + userName + systemFS
-            + "Documents" + systemFS + "Online chat";
+    //    static final String MAIN_DIR = "C:" + systemFS + "Users" + systemFS + userName + systemFS
+//            + "Documents" + systemFS + "Online chat";
+    static final String MAIN_DIR = systemUserHome + systemFS + "Online chat";
     static final String SETTINGS_DIR = MAIN_DIR + systemFS + "settings.txt";
     static final boolean APP_TO_END = false;
 
