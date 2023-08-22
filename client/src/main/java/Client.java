@@ -24,7 +24,7 @@ public class Client extends JFrame implements ActionListener, IConnectionObserve
     private String nickNameUser;
 
     public Client() {
-        nickNameUser = JOptionPane.showInputDialog("Введите пожалуйста Ваше имя");
+        nickNameUser = JOptionPane.showInputDialog("Введите пожалуйста Ваше имя." );
         nickName = new JTextField(nickNameUser);
         LoggerClient.setLoggerName(nickNameUser);
         Toolkit toolkit = Toolkit.getDefaultToolkit(); // так получим размер нашего окна
@@ -61,8 +61,17 @@ public class Client extends JFrame implements ActionListener, IConnectionObserve
         // если строка пустая, то и передавать её никуда не надо
         if (text.equals("")) return;
         // если строчка есть, то стираем то, что в поле input
-        input.setText(null);
-        connection.sendMessage(nickNameUser + ": " + text);
+
+        if ("exit".equalsIgnoreCase(text)) {
+            connection.sendMessage("Пользователь " + nickNameUser + " вышел из чата");
+            LoggerClient.getInstance().logWrite("Пользователь " + nickNameUser + " вышел из чата");
+            input.setText(null);
+            connection.sendMessage(text);
+        } else {
+            input.setText(null);
+            connection.sendMessage(nickNameUser + ": " + text);
+        }
+
         //LoggerClient.getInstance().logWrite(nickNameUser + ": " + text);
     }
 
@@ -96,7 +105,7 @@ public class Client extends JFrame implements ActionListener, IConnectionObserve
             @Override
             public void run() {
                 areaLog.append(text + "\n");
-               LoggerClient.getInstance().logWrite(text);
+                LoggerClient.getInstance().logWrite(text);
                 // текст всегда надо поднимать
                 areaLog.setCaretPosition(areaLog.getDocument().getLength());
 

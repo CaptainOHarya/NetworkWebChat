@@ -25,7 +25,7 @@ public class Server implements IConnectionObserver{
 
                 } catch (IOException e) {
                    // System.err.println("Connection exception " + e);
-                    Logger.getInstance().logWrite("Connection exception " + e);
+                   Logger.getInstance().logWrite("Connection exception " + e);
                 }
             }
         } catch (IOException e) {
@@ -61,6 +61,7 @@ public class Server implements IConnectionObserver{
     @Override
     public synchronized void throwException(Connection connection, Exception ex) {
         System.out.println("Connection " + connection + " exception " + ex);
+        Logger.getInstance().logWrite("Connection " + connection + " exception " + ex);
 
 
     }

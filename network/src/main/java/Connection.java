@@ -29,8 +29,13 @@ public class Connection {
 
     public synchronized void sendMessage(String message) {
         try {
-            out.write(message + "\r\n");
-            out.flush();
+            if ("exit".equalsIgnoreCase(message)) {
+                disconnect();
+            } else {
+                out.write(message + "\r\n");
+                out.flush();
+            }
+
         } catch (IOException e) {
             eventObserver.throwException(this, e);
             // так как строчку не удалаось передать, то вызовем метод дисконнект
